@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx/lite";
 import { ChangeEvent, SubmitEvent, useState } from "react";
 import FormField from "./form-field";
 import type { RegisterErrors, RegisterFields } from "./types";
@@ -77,7 +78,12 @@ export default function RegisterForm() {
       />
       <button
         type="submit"
-        className="mt-2 cursor-pointer rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-colors duration-300 hover:bg-zinc-700 dark:bg-zinc-600 dark:text-zinc-50 dark:hover:bg-zinc-500"
+        className={clsx(
+          "mt-2 rounded-full px-6 py-3",
+          "text-sm font-medium text-background dark:text-zinc-50",
+          "bg-foreground hover:bg-zinc-700 dark:bg-zinc-600 dark:hover:bg-zinc-500",
+          "cursor-pointer transition-colors duration-300"
+        )}
       >
         Register
       </button>

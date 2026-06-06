@@ -1,3 +1,4 @@
+import clsx from "clsx/lite";
 import type { RegisterFields } from "./types";
 
 type FormFieldProps = {
@@ -26,11 +27,12 @@ export default function FormField({ label, name, type, placeholder, value, error
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className={`rounded-lg border px-3 py-2 text-sm outline-none transition-colors duration-300 focus:ring-2 focus:ring-zinc-400 dark:bg-zinc-800 dark:text-zinc-50 ${
-          error
-            ? "border-red-400 dark:border-red-500"
-            : "border-zinc-300 dark:border-zinc-700"
-        }`}
+        className={clsx(
+          "rounded-lg border px-3 py-2",
+          "text-sm dark:text-zinc-50 dark:bg-zinc-800",
+          "outline-none transition-colors duration-300 focus:ring-2 focus:ring-zinc-400",
+          error ? "border-red-400 dark:border-red-500" : "border-zinc-300 dark:border-zinc-700"
+        )}
       />
       {error && <p className="text-xs text-red-500">{error}</p>}
     </div>
