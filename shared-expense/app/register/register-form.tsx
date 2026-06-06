@@ -3,6 +3,7 @@
 import { ChangeEvent, SubmitEvent, useState } from "react";
 import FormField from "./form-field";
 import type { RegisterErrors, RegisterFields } from "./types";
+import { validate } from "./validate";
 
 const defaultFields: RegisterFields = {
   email: "",
@@ -21,27 +22,9 @@ export default function RegisterForm() {
     setErrors((prev) => ({ ...prev, [e.target.name]: undefined }));
   }
 
-  function validate(): RegisterErrors {
-    const errs: RegisterErrors = {};
-    if (!fields.email.trim()) {
-      errs.email = "Email is required.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) {
-      errs.email = "Enter a valid email address.";
-    }
-    if (!fields.firstName.trim()) errs.firstName = "First name is required.";
-    if (!fields.lastName.trim()) errs.lastName = "Last name is required.";
-    if (!fields.password) errs.password = "Password is required.";
-    if (!fields.confirmPassword) {
-      errs.confirmPassword = "Please confirm your password.";
-    } else if (fields.password !== fields.confirmPassword) {
-      errs.confirmPassword = "Passwords do not match.";
-    }
-    return errs;
-  }
-
   function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
-    const errs = validate();
+    const errs = validate(fields);
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
       return;
