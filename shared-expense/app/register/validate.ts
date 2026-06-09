@@ -5,10 +5,9 @@ const rules: Array<{
   check: (f: RegisterFields) => boolean;
   message: string;
 }> = [
+  { field: "userName",        check: (f) => !f.userName.trim(),                          message: "User name is required." },
   { field: "email",           check: (f) => !f.email.trim(),                             message: "Email is required." },
   { field: "email",           check: (f) => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email), message: "Enter a valid email address." },
-  { field: "firstName",       check: (f) => !f.firstName.trim(),                         message: "First name is required." },
-  { field: "lastName",        check: (f) => !f.lastName.trim(),                          message: "Last name is required." },
   { field: "password",        check: (f) => !f.password,                                 message: "Password is required." },
   { field: "confirmPassword", check: (f) => !f.confirmPassword,                          message: "Please confirm your password." },
   { field: "confirmPassword", check: (f) => f.password !== f.confirmPassword,            message: "Passwords do not match." },

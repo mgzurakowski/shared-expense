@@ -1,9 +1,4 @@
-export type RegisterFields = {
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-  confirmPassword: string;
-};
+import { defaultFields } from "./constants";
 
+export type RegisterFields = typeof defaultFields;
 export type RegisterErrors = Partial<Record<keyof RegisterFields, string>>;

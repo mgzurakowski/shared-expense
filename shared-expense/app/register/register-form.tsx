@@ -2,17 +2,10 @@
 
 import clsx from "clsx/lite";
 import { ChangeEvent, SubmitEvent, useState } from "react";
+import { defaultFields } from "./constants";
 import FormField from "./form-field";
 import type { RegisterErrors, RegisterFields } from "./types";
 import { validate } from "./validate";
-
-const defaultFields: RegisterFields = {
-  email: "",
-  firstName: "",
-  lastName: "",
-  password: "",
-  confirmPassword: "",
-};
 
 export default function RegisterForm() {
   const [fields, setFields] = useState<RegisterFields>(defaultFields);
@@ -30,11 +23,19 @@ export default function RegisterForm() {
       setErrors(errs);
       return;
     }
-    alert(`Register: ${fields.email}, ${fields.firstName} ${fields.lastName}`);
+    alert(`Register: ${fields.email} ${fields.userName}`);
   }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+      <FormField
+        label="User name"
+        name="userName"
+        type="text"
+        value={fields.userName}
+        error={errors.userName}
+        onChange={handleChange}
+      />
       <FormField
         label="Email"
         name="email"
@@ -42,22 +43,6 @@ export default function RegisterForm() {
         placeholder="you@example.com"
         value={fields.email}
         error={errors.email}
-        onChange={handleChange}
-      />
-      <FormField
-        label="First name"
-        name="firstName"
-        type="text"
-        value={fields.firstName}
-        error={errors.firstName}
-        onChange={handleChange}
-      />
-      <FormField
-        label="Last name"
-        name="lastName"
-        type="text"
-        value={fields.lastName}
-        error={errors.lastName}
         onChange={handleChange}
       />
       <FormField
